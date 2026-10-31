@@ -32,10 +32,8 @@ def search(query, ctype, mc, loader, page, limit, sort):
         'offset': page * limit,
         'index': sort,
         'facets': _facet(ctype, mc, loader) }
-    , { }
-    if not net.get_json(None, MODRINTH_API + '/search', TIMEOUT, params.items(), k, v, v, k, HEADERS):
-        net.get_json(None, MODRINTH_API + '/search', TIMEOUT, params.items(), k, v, v, k, HEADERS)
-    { } = None
+    data = net.get_json(MODRINTH_API + '/search', timeout=TIMEOUT, params={k: v for
+        k, v in params.items() if v != ''}, headers=HEADERS) or {}
     hits = data.get('hits', [])
     items = []
     for h in hits:

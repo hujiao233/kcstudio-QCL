@@ -60,10 +60,8 @@ class MirrorManager:
 '''
         now = time.time()
         cands = self.candidates(url)
-        , []
-        cands, u, good, u = None
-        , []
-        cands, u, bad, u = None
+        good = [u for u in cands if self._down.get(u, 0) <= now]
+        bad = [u for u in cands if self._down.get(u, 0) > now]
         return good + bad
         
         

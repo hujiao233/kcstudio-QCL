@@ -21,15 +21,34 @@ class Instance:
         self.game_root = game_root
         self.data = data
 
-    id = (lambda self: self.data.get('id', ''))()
-    name = (lambda self: self.data.get('name', self.id))()
-    mc = (lambda self: self.data.get('mc', ''))()
-    loader = (lambda self: self.data.get('loader', 'vanilla'))()
-    loader_version = (lambda self: self.data.get('loader_version', ''))()
-    version_id = (lambda self: if not self.data.get('version_id'):
-self.data.get('version_id')self.mc)()
-    dir = (lambda self: paths.instance_dir(self.game_root, self.id))()
-    
+    @property
+    def id(self):
+        return self.data.get('id', '')
+
+    @property
+    def name(self):
+        return self.data.get('name', self.id)
+
+    @property
+    def mc(self):
+        return self.data.get('mc', '')
+
+    @property
+    def loader(self):
+        return self.data.get('loader', 'vanilla')
+
+    @property
+    def loader_version(self):
+        return self.data.get('loader_version', '')
+
+    @property
+    def version_id(self):
+        return self.data.get('version_id') or self.mc
+
+    @property
+    def dir(self):
+        return paths.instance_dir(self.game_root, self.id)
+
     def save(self):
         util.write_json(_meta_path(self.game_root, self.id), self.data)
 

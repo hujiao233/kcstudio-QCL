@@ -103,15 +103,14 @@ def required_java(mc_version):
     def key(v):
         parts = []
         for p in v.split('.')[:3]:
-            parts.append(int(p))
-        if len(parts) < 3:
-            parts.append(0)
-            if len(parts) < 3:
+            try:
+                parts.append(int(p))
+            except ValueError:
+                parts.append(0)
                 continue
-        return tuple(parts)
-        except ValueError:
+        while len(parts) < 3:
             parts.append(0)
-            continue
+        return tuple(parts)
 
     
     try:
