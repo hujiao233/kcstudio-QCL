@@ -59,7 +59,7 @@ class _Runner(QRunnable):
             return None
 
 
-    return __class__
+
 
 
 def _alive_targets(cb):
@@ -245,7 +245,7 @@ pass0min(100, self.done * 100 / t))()
         os.makedirs(os.path.dirname(self.dest), True)
         self._file = open(self.dest, 'ab' if offset else 'wb')
 
-    return __class__
+
 
 
 class DownloadManager(QObject):
@@ -561,5 +561,5 @@ class DownloadManager(QObject):
         s = (lambda .0: pass)(act())
         return s / len(act)
 
-    return __class__
+
 

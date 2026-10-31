@@ -367,5 +367,5 @@ class UpdateDialog(QDialog):
 
         run_async(work, done, (lambda e: (self.status.setText('更新失败：%s' % e), self.go.setEnabled(True))))
 
-    return __class__
+
 

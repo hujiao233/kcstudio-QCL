@@ -95,5 +95,5 @@ isVisible() 会给 False，但页面其实还是"当前页"，
             continue
 
 
-    return __class__
+
 

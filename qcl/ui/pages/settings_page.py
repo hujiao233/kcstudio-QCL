@@ -12,8 +12,7 @@ from ...core import cleanup, instances as instances_mod, java as java_mod, net, 
 from ...core.constants import APP_VERSION, DEFAULT_API_PORT, DEFAULT_RELAY_PORT, MIRRORS
 from ...core.qtdownload import run_async
 from ..actions import check_launcher_update, open_folder
-, []
-m, MIRROR_NAMES = None, MIRRORS, m
+MIRROR_NAMES = [m.name for m in MIRRORS]
 
 class SettingsPage(Page):
     title = '设置'
@@ -552,7 +551,7 @@ class SettingsPage(Page):
         self.game_root.setText(self.ctx.settings.game_root)
         self.host.setText(self.ctx.settings.host_url)
 
-    return __class__
+
 
 return None
 

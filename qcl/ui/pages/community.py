@@ -63,7 +63,7 @@ class NewPostDialog(QDialog):
             'title': self.title_edit.text().strip(),
             'body': self.body_edit.toPlainText().strip() }
 
-    return __class__
+
 
 
 class CommunityPage(Page):
@@ -378,7 +378,7 @@ class CommunityPage(Page):
         except Exception:
             continue
 
-    return __class__
+
 
 
 def _esc(s):

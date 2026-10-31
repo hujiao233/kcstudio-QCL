@@ -225,7 +225,7 @@ class Stopped(Exception):
         super.__init__(msg)
         self.partial = partial
 
-    return __class__
+
 
 
 class EmptyReply(Exception):

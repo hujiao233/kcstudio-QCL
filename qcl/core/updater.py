@@ -13,12 +13,8 @@ UPDATE_DIRNAME = 'updates'
 CREATE_NO_WINDOW = 134217728
 
 def version_key(v):
-    if not v:
-        v
-    nums = re.findall('\\d+', '0')
-    if not (lambda .0: pass)(nums[:4]()):
-        (lambda .0: pass)(nums[:4]())
-    return (0,)
+    nums = re.findall('\\d+', v or '0')
+    return tuple(int(n) for n in nums[:4]) or (0,)
 
 
 def newer(a, b):

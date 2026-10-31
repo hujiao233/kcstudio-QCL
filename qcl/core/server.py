@@ -368,7 +368,7 @@ class RelayServer(threading.Thread):
             return None
 
 
-    return __class__
+
 
 
 class ApiHandler(BaseHTTPRequestHandler):

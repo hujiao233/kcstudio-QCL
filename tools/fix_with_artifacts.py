@@ -1,8 +1,14 @@
-"""删除 pycdc 对 with 语句 __exit__ 调用的错误渲染。
+"""删除 pycdc 对 3.11+ 机制的伪影渲染。
 
-Python 3.11+ 的 with 依赖 BEFORE_WITH / WITH_EXCEPT_START 与 __exit__ 调用，
-pycdc 会把它们渲染成独立语句 `None(None, None)` / `None(None, None, None)`。
-这些是纯伪影，运行期会抛 TypeError（None 不可调用），必须清除。
+处理两类：
+
+1. with 语句 —— 3.11+ 的 with 依赖 BEFORE_WITH / WITH_EXCEPT_START 与
+   __exit__ 调用，pycdc 渲染成独立语句 `None(None, None)` /
+   `None(None, None, None)`。运行期会抛 TypeError（None 不可调用）。
+
+2. 类体 __classcell__ —— 类体若引用 __class__（如零参 super()），字节码
+   末尾会有 `LOAD_CLOSURE __class__; RETURN_VALUE` 供 __classcell__ 使用。
+   pycdc 把它渲染成类体里的 `return __class__`，这在类作用域是非法的。
 
 判定"删除还是退化为 pass"不能用整文件编译校验（这些文件本身还带别的
 语法错误，编译必然失败），改用缩进拓扑：若该伪影是其所在块的唯一语句
@@ -17,7 +23,8 @@ import sys
 ROOT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(
     os.path.dirname(os.path.abspath(__file__)), os.pardir, 'qcl')
 
-WHOLE = re.compile(r'^(\s*)None\(None, None(?:, None)?\)\s*$')
+WHOLE = re.compile(
+    r'^(\s*)(?:None\(None, None(?:, None)?\)|return __class__)\s*$')
 # 伪影被粘连在一条完整语句之后，例如 `f(x)None(None, x)`
 TRAIL = re.compile(r'^(.*\)+)\s*None\((?:None, )*[A-Za-z_]\w*\)\s*$')
 BLOCK_KW = re.compile(r'^\s*(except|else|elif|finally|case)\b')

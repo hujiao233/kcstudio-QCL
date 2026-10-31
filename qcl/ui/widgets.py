@@ -83,10 +83,10 @@ class RemoteImage(QLabel):
             self.setPixmap(rounded_pixmap(pm, self.size_, self.radius))
         return None
 
-    return __class__
 
 
-def vbox(*, margin, spacing, parent, *items):
+
+def vbox(*items, margin=0, spacing=8, parent=None):
     '''竖向布局。位置参数一律是要加入的子控件（或 int=间距、str=弹簧）。
 
 parent 只接受**关键字参数**。原因：历史上很多调用写成 hbox(self.combo, refresh)，
@@ -109,7 +109,7 @@ parent 只接受**关键字参数**。原因：历史上很多调用写成 hbox(
     return lay
 
 
-def hbox(*, margin, spacing, parent, *items):
+def hbox(*items, margin=0, spacing=8, parent=None):
     lay = QHBoxLayout(parent)
     lay.setContentsMargins(margin, margin, margin, margin)
     lay.setSpacing(spacing)
@@ -150,7 +150,7 @@ class Card(QFrame):
         self.clicked.emit()
         super.mouseReleaseEvent(e)
 
-    return __class__
+
 
 
 class SideBar(QWidget):
@@ -197,7 +197,7 @@ class SideBar(QWidget):
             b.setStyleSheet('text-align: left; padding: 10px 12px; font-size: 13px;' + 'background: %s; color: #ffffff; border-radius: 8px;' % theme.ACCENT_DARK if k == key else '')
             b.update()
 
-    return __class__
+
 
 
 class DownloadRow(QFrame):
@@ -257,7 +257,7 @@ class DownloadRow(QFrame):
         return None
         self.info.setText('排队中')
 
-    return __class__
+
 
 
 class DownloadPanel(QWidget):
@@ -310,7 +310,7 @@ class DownloadPanel(QWidget):
             row.deleteLater()
         return None
 
-    return __class__
+
 
 
 class Toast(QLabel):
@@ -342,5 +342,5 @@ class Toast(QLabel):
         self.hide()
         self.deleteLater()
 
-    return __class__
+
 

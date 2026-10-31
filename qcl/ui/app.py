@@ -99,7 +99,7 @@ class QCLApplication(QApplication):
             del e
 
 
-    return __class__
+
 
 
 class _UiBus(QObject):

@@ -155,7 +155,7 @@ passloaders.forge_versions(mc)loaders.neoforge_versions(mc))()
             'loader_version': '' }
         self.accept()
 
-    return __class__
+
 
 
 class AccountDialog(QDialog):
@@ -377,7 +377,7 @@ class AccountDialog(QDialog):
         self.account = acc
         self.accept()
 
-    return __class__
+
 
 
 class ProjectDialog(QDialog):
@@ -483,7 +483,7 @@ class ProjectDialog(QDialog):
             v])
         self.accept()
 
-    return __class__
+
 
 
 def ctype_has_deps(v):
@@ -551,7 +551,7 @@ class PublishDialog(QDialog):
         self.ctx.toast('已发布版本 %s，客户端将自动收到更新提示' % m.get('version'), 'ok')
         self.accept()
 
-    return __class__
+
 
 
 class ServerDialog(QDialog):
@@ -587,7 +587,7 @@ class ServerDialog(QDialog):
             'name': '服务器',
             'addr': self.addr.text().strip() }
 
-    return __class__
+
 
 
 class TextDialog(QDialog):
@@ -605,5 +605,5 @@ class TextDialog(QDialog):
         b.clicked.connect(self.accept)
         lay.addWidget(b)
 
-    return __class__
+
 

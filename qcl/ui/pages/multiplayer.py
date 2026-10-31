@@ -745,5 +745,5 @@ d.get('msg')(self.ctx.toast('已发送', 'ok'), self.f_input.clear(), self._load
         self._refresh_account()
         self._fill_servers()
 
-    return __class__
+
 

@@ -255,7 +255,7 @@ passinstances_mod.get_instance(iid, self.ctx.game_root))()
             self._search(True)
         return None
 
-    return __class__
+
 
 
 def _fmt(n):

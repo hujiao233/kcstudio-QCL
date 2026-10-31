@@ -200,7 +200,7 @@ passself.show_normal()))
         e.accept()
         self._quit()
 
-    return __class__
+
 
 
 def _h(n):

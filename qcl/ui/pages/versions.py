@@ -269,5 +269,5 @@ passloaders.forge_versions(mc)loaders.neoforge_versions(mc))()
             self._load()
         return None
 
-    return __class__
+
 

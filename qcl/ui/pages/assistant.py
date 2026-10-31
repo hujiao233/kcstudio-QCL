@@ -601,7 +601,7 @@ class AssistantPage(Page):
         color = theme.ACCENT if who == 'AI' else theme.TEXT
         self.chat.append(f'''<div style="font-weight:700;margin-top:10px;color:;"></div><div></div>''')
 
-    return __class__
+
 
 
 def _alt_mcs(mc):

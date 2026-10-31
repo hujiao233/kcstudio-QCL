@@ -302,5 +302,5 @@ passself.ctx.toast('已结束游戏进程', 'warn')None('游戏未能正常退�
         self._refresh()
         self._refresh_account()
 
-    return __class__
+
 

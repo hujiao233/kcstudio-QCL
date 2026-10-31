@@ -356,5 +356,5 @@ self.instopen_folder(self.inst.dir)))
     def on_show(self):
         self.refresh()
 
-    return __class__
+
 
