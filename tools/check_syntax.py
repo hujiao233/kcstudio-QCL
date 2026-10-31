@@ -11,6 +11,17 @@ import subprocess
 import sys
 
 
+def _write(stream, data):
+    """Write bytes to stream, tolerating console codecs that cannot encode
+    some of the reported characters."""
+    buf = getattr(stream, 'buffer', None)
+    if buf is not None:
+        buf.write(data)
+        buf.flush()
+    else:
+        stream.write(data.decode('utf-8', 'replace'))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--root', required=True)
@@ -42,8 +53,10 @@ print("checked %d, bad %d" % (len(sys.argv) - 1, bad))
 '''
     py = args.python313 or sys.executable
     r = subprocess.run([py, '-c', script] + files, capture_output=True)
-    sys.stdout.write(r.stdout.decode('utf-8', 'replace'))
-    sys.stderr.write(r.stderr.decode('utf-8', 'replace'))
+    # Write raw bytes: the report may contain characters the console codec
+    # (e.g. GBK on Chinese Windows) cannot encode.
+    _write(sys.stdout, r.stdout)
+    _write(sys.stderr, r.stderr)
     return 0
 
 
