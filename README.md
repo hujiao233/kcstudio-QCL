@@ -1,5 +1,11 @@
 # QCL 启动器
 
+> **要可运行的程序**：[Release v1.0.0](https://github.com/hujiao233/kcstudio-QCL/releases/tag/v1.0.0)
+> 下载 `QCL-1.0.0-portable-win64.zip`，解压后双击 `QCL.exe` 即可，无需安装 Python 与依赖。
+>
+> **本仓库的 `qcl/` 源码不可直接运行**（逆向反编译产物，43 个模块中 37 个有语法错误），
+> 仅供阅读实现。详见文末「源码状态」。
+
 一个为 Minecraft 玩家做的启动器：实时同步官方版本、Mod/光影/资源包/数据包/插件 一键下载、
 每个版本完全隔离、内置虚拟网联机、「我在自己电脑上发布新版本，别人自动收到更新提示」的自动更新，
 外加一个**能一句话帮你配好整合包、并能联网查资料回答问题的 AI 助手**。
@@ -290,3 +296,30 @@ build.bat
 >如有疑问，最终解释权归QCL开发团队所有
 >开发者保留随时修改本协议的权利
 >使用本软件即代表您已阅读并同意以上条款
+
+
+## 源码状态（重要）
+
+本仓库的 qcl/ 目录是从发行包字节码**反编译**得到的，供阅读实现，
+**尚不能直接运行**：43 个模块中 37 个无法被 Python 解析。
+
+判定方式：
+
+\\at
+python tools\check_syntax.py --root . --python313 <python3.13>
+\
+根因是反编译器（pycdc）对 CPython 3.11+ 的两项机制支持不全：
+
+| 机制 | 表现 | 状态 |
+| --- | --- | --- |
+| 零成本异常（异常表） | 	ry/except 缩进错乱、块范围吞掉后续代码 | **已修复** |
+| PEP 709 内联推导式 | , []、\(lambda .0: ...)\、\.0continue\ 残片 | 待解 |
+
+零成本异常的修复已随 	ools/pycdc_python313.patch 提交，改了三处：
+异常表项 stack_depth == 0 的判定在 3.11+ 永不成立（depth 已含解释器压入的
+异常对象，实测 	ry/except 为 1），放宽为 <= 1；END_FOR 的额外出栈只对
+3.12 生效，改为 >= 3.12；try 块结束位置误用 handler 偏移 entry.target，
+改用 entry.end_offset。
+
+需要可运行的程序，请用 [Release v1.0.0](https://github.com/hujiao233/kcstudio-QCL/releases/tag/v1.0.0)
+的便携包（31.7 MB，解压即用）。
