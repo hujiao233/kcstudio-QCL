@@ -11,39 +11,34 @@ def _desktop():
     '''获取桌面目录，失败时逐级回落，且结果必须是真实存在的目录'''
     home = os.path.expanduser('~')
     candidates = []
-    
     try:
         buf = ctypes.create_unicode_buffer(1024)
-        hr = ctypes.windll.shell32.SHGetKnownFolderPath(ctypes.byref(_GUID('{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}')), 0, None, buf)
+        hr = ctypes.windll.shell32.SHGetKnownFolderPath(ctypes.byref(_GUID(
+            '{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}')), 0, None, buf)
         if hr == 0:
-            pass
-        candidates.append(buf.value)
-        
-        try:
-            import winreg as _wr
-            k = _wr.OpenKey(_wr.HKEY_CURRENT_USER, 'Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders')
-            (val, _) = _wr.QueryValueEx(k, 'Desktop')
-            _wr.CloseKey(k)
-            if isinstance(val, str):
-                pass
+            candidates.append(buf.value)
+    except Exception:
+        pass
+    try:
+        import winreg as _wr
+        k = _wr.OpenKey(_wr.HKEY_CURRENT_USER,
+            'Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders')
+        (val, _) = _wr.QueryValueEx(k, 'Desktop')
+        _wr.CloseKey(k)
+        if isinstance(val, str):
             candidates.append(os.path.expandvars(val))
-            candidates.append(os.path.join(home, 'Desktop'))
-            candidates.append(os.path.join(home, 'OneDrive', 'Desktop'))
-            candidates.append(home)
-            for c in candidates:
-                if c:
-                    if os.path.isdir(c):
-                        if os.path.isabs(c):
-                            
-                        return candidates, os.path.normpath(c)
-                    continue
-            return os.path.join(home, 'Desktop')
-            except Exception:
-                continue
-                except Exception:
-                    continue
-                    except Exception:
-                        continue
+    except Exception:
+        pass
+    candidates.append(os.path.join(home, 'Desktop'))
+    candidates.append(os.path.join(home, 'OneDrive', 'Desktop'))
+    candidates.append(home)
+    for c in candidates:
+        try:
+            if c and os.path.isdir(c) and os.path.isabs(c):
+                return os.path.normpath(c)
+        except Exception:
+            continue
+    return os.path.join(home, 'Desktop')
 
 
 class _GUID(ctypes.Structure):
