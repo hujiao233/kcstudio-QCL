@@ -33,7 +33,8 @@ def walk(co, depth=0, prefix=''):
 
 def main():
     tag, mod = sys.argv[1], sys.argv[2]
-    fp = os.path.join(BASE, tag, mod + '.pyc')
+    # 模块按点分层存放：qcl.core.paths -> bytecode/<tag>/qcl/core/paths.pyc
+    fp = os.path.join(BASE, tag, *mod.split('.')) + '.pyc'
     co = marshal.loads(open(fp, 'rb').read()[16:])
     if len(sys.argv) < 4:
         walk(co)
