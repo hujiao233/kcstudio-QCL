@@ -15,3 +15,6 @@ venv/
 .idea/
 .vscode/
 *.log
+
+# 反编译基线字节码是孤本（原始安装包已丢失），必须入库
+!bytecode/**/*.pyc
