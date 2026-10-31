@@ -23,56 +23,26 @@ def probe_ollama(base, timeout):
 
 返回 {"ok": bool, "models": [str], "base": url, "error": str}
 '''
-    st = settings
-    # import  # [decompiler] module name lost
-    if not base:
-        base
-        if not st.settings.get('ai_ollama_url'):
-            st.settings.get('ai_ollama_url')
-    base = DEFAULT_OLLAMA_URL.rstrip('/')
+    from . import settings as st
+    base = (base or st.settings.get('ai_ollama_url') or DEFAULT_OLLAMA_URL).rstrip('/')
     url = base + '/api/tags'
-    
     try:
         import requests
-        r = requests.get(url, (1.5, timeout))
+        r = requests.get(url, timeout=1.5)
         if r.status_code != 200:
-            pass
-        return {
-            'ok': False,
-            'models': [],
-            'base': base,
-            'error': 'HTTP %s' % r.status_code }
-        
-        try:
-            if not r.json():
-                r.json()
-            data = { }
-            models = []
-            if not data.get('models'):
-                data.get('models')
-            for m in []:
-                if not m.get('name'):
-                    m.get('name')
-                name = m.get('model')
-                if not name:
-                    continue
-                
-                try:
-                    models.append(name)
-                    continue
-                    if not bool(models):
-                        bool(models)
-                    return {
-                        'ok': True,
-                        'models': models,
-                        'base': base,
-                        'error': '' }
-                except Exception:
-                    e = None
-                    del e
-                    return None
-                    None = 
-                    del e
+            return {'ok': False, 'models': [], 'base': base, 'error':
+                'HTTP %s' % r.status_code}
+        data = r.json() or {}
+        models = []
+        for m in data.get('models') or []:
+            name = m.get('name') or m.get('model')
+            if name:
+                models.append(name)
+        return {'ok': bool(models) or True, 'models': models, 'base': base,
+            'error': ''}
+    except Exception as e:
+        return {'ok': False, 'models': [], 'base': base, 'error': type(e
+            ).__name__}
 
 
 def resolve_provider(force_probe):

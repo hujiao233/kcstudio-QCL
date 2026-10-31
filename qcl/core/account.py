@@ -7,6 +7,7 @@ import requests
 TIMEOUT = 8
 
 class ApiError(Exception):
+    pass
 
 
 class Api:
