@@ -38,13 +38,11 @@ def version_list(force):
 
 
 def releases(force):
-    , []
-    return v,
-    
+    return [v for v in version_list(force) if v.get('type') == 'release']
+
 
 def snapshots(force):
-    , []
-    return v,
+    return [v for v in version_list(force) if v.get('type') != 'release']
     
 
 def latest():
