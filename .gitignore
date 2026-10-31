@@ -1,0 +1,17 @@
+# 原始安装包与逆向中间产物（不入库）
+QCL-Setup-2.0.0.exe
+QCL-Setup-2.0.0.exe_extracted/
+_extracted/
+_payload/
+_tools/
+
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.idea/
+.vscode/
+*.log
