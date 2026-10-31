@@ -85,7 +85,7 @@ def _writable(path):
             f.write('1')
             
             try:
-                None(None, None)
+
                 os.remove(probe)
                 return True
                 if not None:

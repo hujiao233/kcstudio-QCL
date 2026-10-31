@@ -58,7 +58,7 @@ def report_exception(exc, where):
                     f.write(''.join(traceback.format_exception(type(exc), exc, exc.__traceback__)) + '\n')
                     
                     try:
-                        None(None, None)
+
                         return None
                         continue
                         if not None:
@@ -281,13 +281,13 @@ def ensure_remove_cmd():
                     cur = f.read()
                     
                     try:
-                        None(None, None)
+
                         if cur != data:
                             with open(target, 'wb') as f:
                                 f.write(data)
                                 
                                 try:
-                                    None(None, None)
+
                                     return target
                                     return target
                                     if not None:

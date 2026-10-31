@@ -41,7 +41,7 @@ def cmd_server(args):
                 f.write(line + '\n')
                 
                 try:
-                    None(None, None)
+
                     
                     try:
                         print(line)

@@ -203,7 +203,7 @@ class HostTunnel:
                                     st = self.streams.get(sid)
                                     
                                     try:
-                                        None(None, None)
+
                                         if st:
                                             
                                             try:
@@ -267,7 +267,7 @@ class HostTunnel:
             local = socket.create_connection(('127.0.0.1', self.lan_port), 5)
             with self.lock:
                 self.streams[sid] = local
-            None(None, None)
+
             threading.Thread(self._stream_reader, (sid, local), True).start()
             self._say('有玩家接入（通道 %d）' % sid)
             return None
@@ -304,7 +304,7 @@ class HostTunnel:
     def _close_stream(self, sid):
         with self.lock:
             st = self.streams.pop(sid, None)
-        None(None, None)
+
         if st:
             
             try:
@@ -327,7 +327,7 @@ class HostTunnel:
             for s in list(self.streams.values()):
                 s.close()
             self.streams.clear()
-            None(None, None)
+
             if self.sock:
                 
                 try:

@@ -64,7 +64,7 @@ def write_text_oem(path, text):
             f.write(text)
             
             try:
-                None(None, None)
+
                 return True
                 if not None:
                     pass
@@ -91,7 +91,7 @@ def read_text_any(path):
             raw = f.read()
             
             try:
-                None(None, None)
+
                 for enc in ('utf-8-sig', 'utf-8', oem_encoding(), 'gbk', 'cp1252'):
                     
                     return ('utf-8-sig', 'utf-8', oem_encoding(), 'gbk', 'cp1252'), raw.decode(enc)
@@ -116,7 +116,7 @@ def sha1_file(path):
         f = open(path, 'rb')
         for chunk in iter((lambda : f.read(1048576)), b''):
             h.update(chunk)
-    None(None, None)
+
     return h.hexdigest()
     if not None:
         pass
@@ -129,7 +129,7 @@ def sha256_file(path):
         f = open(path, 'rb')
         for chunk in iter((lambda : f.read(1048576)), b''):
             h.update(chunk)
-    None(None, None)
+
     return h.hexdigest()
     if not None:
         pass
@@ -185,7 +185,7 @@ def write_json(path, data):
             json.dump(data, f, False, 2)
             
             try:
-                None(None, None)
+
                 os.replace(tmp, path)
                 return True
                 if not None:
@@ -240,11 +240,11 @@ def unzip(src, dest, exclude_prefix, overwrite):
             with zf.open(info) as src_f:
                 with open(target, 'wb') as dst_f:
                     shutil.copyfileobj(src_f, dst_f, 524288)
-                None(None, None)
+
                 any(None, None)
                 n += 1
                 continue
-                None(None, None)
+
                 return n
                 if not None:
                     pass
@@ -273,7 +273,7 @@ def make_zip(src_dir, out_file, skip_dirs):
             rel = os.path.relpath(full, src_dir)
             zf.write(full, rel)
         continue
-        None(None, None)
+
         return out_file
         
         if not d,:

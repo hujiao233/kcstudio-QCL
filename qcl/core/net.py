@@ -278,7 +278,7 @@ progress(done, total) 可选回调。'''
                         continue
                     progress(got, total)
                 None if os.path.exists(dest) and size else cands
-                None(None, None)
+
                 if sha1 and util.sha1_file(dest) != sha1:
                     os.remove(dest)
                     last = ValueError('校验失败 %s' % u)

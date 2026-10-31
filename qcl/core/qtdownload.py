@@ -171,10 +171,10 @@ def run_async(fn, on_result, on_error):
     if on_result or on_error:
         
         _wrapped['result'] = lambda res: if on_result:
-pass_dispatch(_guarded(on_result), res)None(None, res)
+pass_dispatch(_guarded(on_result), res)
         
         _wrapped['error'] = lambda err: if on_error:
-pass_dispatch(_guarded(on_error), err)None(None, err)
+pass_dispatch(_guarded(on_error), err)
         sig.result.connect(_wrapped['result'], Qt.QueuedConnection)
         sig.error.connect(_wrapped['error'], Qt.QueuedConnection)
     else:

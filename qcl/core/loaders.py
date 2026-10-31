@@ -45,7 +45,7 @@ def ensure_launcher_profile(game_root):
     return p
     with open(p, 'w', 'utf-8') as f:
         json.dump(_LAUNCHER_PROFILES, f, False, 2)
-    None(None, None)
+
     return p
     if not None:
         pass

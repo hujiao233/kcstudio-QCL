@@ -159,7 +159,7 @@ def write_updater_bat(stage, dst, app):
     content = f'''@echo off\nchcp 65001 >nul\nset "SRC="\nset "DST="\nset "APP="\nping -n 3 127.0.0.1 >nul\nxcopy "%SRC%\\*" "%DST%\\" /E /Y /Q /I >nul\nstart "" "%APP%"\nrmdir /s /q "%SRC%"\ndel "%~f0"\n'''
     with open(bat, 'w', 'utf-8') as f:
         f.write(content)
-    None(None, None)
+
     return bat
     if not None:
         pass

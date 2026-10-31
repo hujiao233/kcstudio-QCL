@@ -37,7 +37,7 @@ class Store:
                     self.data.update(json.load(f))
                     
                     try:
-                        None(None, None)
+
                         return None
                         return None
                         if not None:
@@ -58,9 +58,9 @@ class Store:
             tmp = self.path + '.tmp'
             with open(tmp, 'w', 'utf-8') as f:
                 json.dump(self.data, f, False, 2)
-            None(None, None)
+
             os.replace(tmp, self.path)
-            None(None, None)
+
             return None
             if not None:
                 pass
@@ -154,7 +154,7 @@ class RelayServer(threading.Thread):
     def _as_host(self, conn, addr, room_id, token, port):
         with self.store.lock:
             name = self.store.data['tokens'].get(token)
-        None(None, None)
+
         if not name:
             
             try:
@@ -175,11 +175,11 @@ class RelayServer(threading.Thread):
                         'name': room.get('name', name),
                         'created': room.get('created', int(time.time())) })
                     room['host_conn'] = conn
-                None(None, None)
+
                 self._say(f'''房主  上线（房间 ，来自 ）''')
                 with self.plock:
                     waiters = self.pending.pop(room_id, [])
-                None(None, None)
+
                 for gsock, gtoken in waiters:
                     self._link(room_id, gsock, gtoken)
                 reader = FrameReader(conn)
@@ -257,7 +257,7 @@ class RelayServer(threading.Thread):
     def _as_guest(self, conn, addr, room_id, token):
         with self.store.lock:
             name = self.store.data['tokens'].get(token)
-        None(None, None)
+
         if not name:
             
             try:
@@ -268,7 +268,7 @@ class RelayServer(threading.Thread):
                 if not room or room.get('host_conn'):
                     with self.plock:
                         self.pending.setdefault(room_id, []).append((conn, token))
-                    None(None, None)
+
                     deadline = time.time() + 20
                     if time.time() < deadline:
                         room = self.store.data['rooms'].get(room_id)
@@ -278,9 +278,9 @@ class RelayServer(threading.Thread):
                                 if (conn, token) in lst:
                                     lst.remove((conn, token))
                                     self._link(room_id, conn, token)
-                                    None(None, None)
+
                             return None
-                        None(None, None)
+
                         time.sleep(0.3)
                         if time.time() < deadline:
                             continue
@@ -289,7 +289,7 @@ class RelayServer(threading.Thread):
                         if (conn, token) in lst:
                             pass
                         lst.remove((conn, token))
-                    None(None, None)
+
                     
                     try:
                         conn.close()
@@ -576,7 +576,7 @@ default)()
                                     u['last_seen'] = int(time.time())
                                     
                                     try:
-                                        None(None, None)
+
                                         room = self.store.data['rooms'].get(me)
                                         if room:
                                             room['last_seen'] = int(time.time())
@@ -667,7 +667,7 @@ default)()
             if not self.store.data.get('forum'):
                 self.store.data.get('forum')
             posts = list([])
-        None(None, None)
+
         posts.sort((lambda p: p.get('ts', 0)), True)
         return self._send(200, {
             'posts': posts[:100] })
@@ -709,7 +709,7 @@ default)()
             'author': me,
             'ts': int(time.time()),
             'replies': [] })
-        None(None, None)
+
         self.store.save()
         return self._send(200, {
             'ok': True,
@@ -746,7 +746,7 @@ default)()
                     'ts': int(time.time()) })
                 []
             raise ValueError('帖子不存在（可能已被主机清理）')
-            None(None, None)
+
             self.store.save()
             return self._send(200, {
                 'ok': True })
@@ -762,7 +762,7 @@ default)()
         
         , [], msgs = [], m
         m = None
-        None(None, None)
+
         return self._send(200, {
             'messages': msgs[-200:] })
         
@@ -797,7 +797,7 @@ default)()
         if len(msgs) > 500:
             pass
         del msgs[:len(msgs) - 500]
-        None(None, None)
+
         self.store.save()
         return self._send(200, {
             'ok': True,
@@ -843,7 +843,7 @@ default)()
             'status': '',
             'playing': '',
             'token': '' }
-        None(None, None)
+
         self.store.save()
         self._say('新用户注册：%s' % name)
         return self._login(d)
@@ -883,7 +883,7 @@ default)()
         u['token'] = tok
         u['last_seen'] = int(time.time())
         self.store.data['tokens'][tok] = real
-        None(None, None)
+
         self.store.save()
         return self._send(200, {
             'token': tok,
@@ -900,7 +900,7 @@ default)()
             u['status'] = d.get('status', '')
             u['playing'] = d.get('playing', '')
             u['last_seen'] = int(time.time())
-        None(None, None)
+
         return self._send(200, {
             'ok': True })
         if not None:
@@ -944,7 +944,7 @@ default)()
             'ok': True,
             'msg': '已成为好友' })
         t['pending'].append(me)
-        None(None, None)
+
         self.store.save()
         return self._send(200, {
             'ok': True,
@@ -995,7 +995,7 @@ default)()
             if me in t.get('friends', []):
                 pass
             t['friends'].remove(me)
-        None(None, None)
+
         self.store.save()
         return self._send(200, {
             'ok': True })
@@ -1023,7 +1023,7 @@ default)()
                     'room_mc': room.get('mc', ''),
                     'room_name': room.get('name', '') })
             pending = list(u.get('pending', []))
-        None(None, None)
+
         return self._send(200, {
             'friends': out,
             'pending': pending })
@@ -1053,7 +1053,7 @@ default)()
                 'guests': { },
                 'next_sid': 1,
                 'ip': '' }
-        None(None, None)
+
         if not d.get('name'):
             d.get('name')
         return self._send(200, {
@@ -1077,7 +1077,7 @@ default)()
             if d.get('mc'):
                 room['mc'] = d['mc']
             room['last_seen'] = int(time.time())
-        None(None, None)
+
         return self._send(200, {
             'ok': True })
         if not None:
@@ -1088,7 +1088,7 @@ default)()
     def _room_close(self, me):
         with self.store.lock:
             self.store.data['rooms'].pop(me, None)
-        None(None, None)
+
         return self._send(200, {
             'ok': True })
         if not None:
@@ -1099,7 +1099,7 @@ default)()
     def _room_info(self, me):
         with self.store.lock:
             r = dict(self.store.data['rooms'].get(me, { }))
-        None(None, None)
+
         r.pop('host_conn', None)
         r.pop('guests', None)
         return self._send(200, {
@@ -1127,7 +1127,7 @@ default)()
                     'players': len(r.get('guests', { })),
                     'created': r.get('created', 0),
                     'ip': r.get('ip', '') })
-        None(None, None)
+
         out.sort((lambda x: -x.get('created', 0)))
         return self._send(200, {
             'rooms': out })
@@ -1210,7 +1210,7 @@ default)()
                 raw = f.read()
                 
                 try:
-                    None(None, None)
+
                     return self._send(200, raw, 'application/octet-stream')
                     if not None:
                         pass
@@ -1270,7 +1270,7 @@ class QCLServer:
                     self.store.data['rooms'].pop(rid, None)
                 
                 try:
-                    None(None, None)
+
                     self.store.save()
                     continue
                     if not None:
