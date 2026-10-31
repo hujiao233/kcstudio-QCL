@@ -61,7 +61,8 @@ def uninstall_entry_exists():
 def in_path():
     cur = paths.get_user_path()
     norm = os.path.normcase(os.path.abspath(paths.APP_DIR))
-    return (lambda .0: os.path.normcase(os.path.abspath(p)) == norm.0continue)(cur.split(os.pathsep)())
+    return any(os.path.normcase(os.path.abspath(p)) == norm for p in cur.split(
+        os.pathsep) if p)
 
 
 def ensure_integration():
